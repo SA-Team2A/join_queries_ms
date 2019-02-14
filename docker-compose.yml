@@ -1,0 +1,27 @@
+version: "2"
+services:
+  users-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: users_ms_development
+      MYSQL_PASSWORD: 123
+      MYSQL_HOST: users-db
+      MYSQL_USER: arquisoft
+      MYSQL_ROOT_PASSWORD: 123
+
+  comments-db:
+    image: mongo
+    ports:
+    - "27017:27017"
+
+  join-ms:
+    build: .
+    ports:
+    - "3000:3000"
+    command: bash -c "sleep 30 && node app.js"
+    environment:
+      COMMENTS_DB: comments-db
+      COMMENTS_DB_PORT: 27017
+      USERS_DB: users-db
+      USERS_DB_USERNAME: root
+      USERS_DB_PASSWORD: 123
