@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
   host: url,
   user: user,
   password: password,
-  database: 'users_ms_development'
+  database: 'users'
 })
 
 const where_in  = (params, cb) => {
