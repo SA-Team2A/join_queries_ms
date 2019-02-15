@@ -12,8 +12,8 @@ const connection = mysql.createConnection({
 })
 
 const where  = (param, cb) => {
-  const q = 'SELECT DISTINCT * FROM `Recipes` WHERE `Collection_id` = ?', [param]
-  connection.query(q, (err, res) => {
+  const q = 'SELECT DISTINCT * FROM `Recipes` WHERE `Collection_id` = ?'
+  connection.query(q, [param], (err, res) => {
     cb(err, res)
   })
 }
