@@ -1,7 +1,9 @@
 const join = require('./db/join')
 const express = require('express')
 const users = require('./db/users')
+const recipes = require('./db/recipes')
 const comments = require('./db/comments')
+const collections = require('./db/collections')
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -42,6 +44,34 @@ app.get('/users_comments', (req, res, next) => {
           })
         }
         res.status(200).send(join(result, 'user_id', result2, 'id'))
+      })
+    }
+  })
+})
+
+app.get('/recipes_collections', (req, res, next) => {
+  const collection_id = parseInt(req.query.collection_id)
+  collections.where(collection_id, (err, result) => {
+    if (err) {
+      console.log(err)
+      return res.status(500).send({
+        code: 500,
+        message: 'INTERNAL ERROR'
+      })
+    }
+    if (result.length === 0) {
+      console.log(`No Recipes for collection with id = ${collection_id}`)
+      res.status(200).json([])
+    } else {
+      recipes.find_in(result.map( r => r.Recipe_id ), (err2, result2) => {
+        if (err2) {
+          console.log(err2)
+          return res.status(500).send({
+            code: 500,
+            message: 'INTERNAL ERROR'
+          })
+        }
+        res.status(200).send(join(result, 'Recipe_id', result2, '_id'))
       })
     }
   })
