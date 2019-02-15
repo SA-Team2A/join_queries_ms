@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient
 
-const url = process.env.COMMENTS_DB || 'comments'
-const port = process.env.COMMENTS_DB_PORT || 27019
+const url = process.env.RECIPES_DB || 'recipes-db'
+const port = process.env.RECIPES_DB_PORT || 27017
 const uri = `mongodb://${url}:${port}`
 
 var recipes_db = null

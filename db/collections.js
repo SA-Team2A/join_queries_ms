@@ -1,8 +1,8 @@
 const mysql = require('mysql2')
 
-const url = process.env.USERS_DB || 'localhost'
-const user = process.env.USERS_DB_USERNAME || 'root'
-const password = process.env.USERS_DB_PASSWORD || 123
+const url = process.env.COLLECTIONS_DB || 'collections-ms'
+const user = process.env.COLLECTIONS_DB_USERNAME || 'root'
+const password = process.env.COLLECTIONS_DB_PASSWORD || 'password'
 
 const connection = mysql.createConnection({
   host: url,
