@@ -7,7 +7,7 @@ const uri = `mongodb://${url}:${port}`
 var comments_db = null
 
 MongoClient.connect(uri, (err, client) => {
-  comments_db = client.db('comments').collection('comments')
+  comments_db = client.db('comments').collection('Comment')
 })
 
 const find = (params, cb) => {
