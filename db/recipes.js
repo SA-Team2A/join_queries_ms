@@ -11,7 +11,11 @@ MongoClient.connect(uri, (err, client) => {
 })
 
 const find_in = (params, cb) => {
-  const filter = { _id: { $in: params } }
+  const or = []
+  for (id of params) {
+    or.push({ _id: id })
+  }
+  const filter = { $or: or }
   recipes_db.find(filter).toArray((err, docs) => {
     cb(err, docs)
   })
