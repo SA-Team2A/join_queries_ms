@@ -63,7 +63,9 @@ app.get('/recipes_collections', (req, res, next) => {
       console.log(`No Recipes for collection with id = ${collection_id}`)
       res.status(200).json([])
     } else {
-      recipes.find_in(result.map( r => r.Recipe_id ), (err2, result2) => {
+      const params = result.map( r => r.Recipe_id )
+      console.log(params)
+      recipes.find_in(params, (err2, result2) => {
         if (err2) {
           console.log(err2)
           return res.status(500).send({
@@ -71,6 +73,7 @@ app.get('/recipes_collections', (req, res, next) => {
             message: 'INTERNAL ERROR'
           })
         }
+        console.log(result2)
         res.status(200).send(join(result, 'Recipe_id', result2, '_id'))
       })
     }
