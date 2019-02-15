@@ -1,4 +1,4 @@
-const {MongoClient, ObjectID } = require('mongodb').MongoClient
+const { MongoClient, ObjectID } = require('mongodb')
 
 const url = process.env.RECIPES_DB || 'recipes-db'
 const port = process.env.RECIPES_DB_PORT || 27017
