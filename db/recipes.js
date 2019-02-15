@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient
+const {MongoClient, ObjectID } = require('mongodb').MongoClient
 
 const url = process.env.RECIPES_DB || 'recipes-db'
 const port = process.env.RECIPES_DB_PORT || 27017
@@ -13,7 +13,7 @@ MongoClient.connect(uri, (err, client) => {
 const find_in = (params, cb) => {
   const or = []
   for (id of params) {
-    or.push({ _id: id })
+    or.push({ _id: new ObjectID(id) })
   }
   const filter = { $or: or }
   recipes_db.find(filter).toArray((err, docs) => {
