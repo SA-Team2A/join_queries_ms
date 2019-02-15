@@ -31,7 +31,7 @@ app.get('/users_comments', (req, res, next) => {
     }
     if (result.length === 0) {
       console.log(`No comments to recipe with id = ${recipe_id}`)
-      res.status(200).json({})
+      res.status(200).json([])
     } else {
       users.where_in(result.map( r => r.user_id ), (err2, result2) => {
         if (err2) {
